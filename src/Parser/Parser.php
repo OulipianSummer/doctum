@@ -21,8 +21,10 @@ use Doctum\Reflection\LazyClassReflection;
 use Doctum\Store\StoreInterface;
 use Symfony\Component\Finder\Finder;
 use SplObjectStorage;
+use Doctum\Parser\ParserInterface;
+use Doctum\Parser\ProjectTraverserInterface;
 
-class Parser
+class Parser implements ParserInterface
 {
     /** @var StoreInterface */
     protected $store;
@@ -30,10 +32,10 @@ class Parser
     protected $iterator;
     /** @var CodeParser */
     protected $parser;
-    /** @var ProjectTraverser */
+    /** @var ProjectTraverserInterface */
     protected $traverser;
 
-    public function __construct($iterator, StoreInterface $store, CodeParser $parser, ProjectTraverser $traverser)
+    public function __construct(string|Finder $iterator, StoreInterface $store, CodeParser $parser, ProjectTraverserInterface $traverser)
     {
         $this->iterator  = $this->createIterator($iterator);
         $this->store     = $store;
@@ -41,7 +43,7 @@ class Parser
         $this->traverser = $traverser;
     }
 
-    public function parse(Project $project, $callback = null)
+    public function parse(Project $project, $callback = null): Transaction
     {
         $step        = 0;
         $steps       = iterator_count($this->iterator);
@@ -111,7 +113,7 @@ class Parser
      * @param string|Finder $iterator
      * @return Finder
      */
-    private function createIterator($iterator)
+    private function createIterator(string|Finder $iterator)
     {
         if (is_string($iterator)) {
             $it = new Finder();

@@ -13,7 +13,7 @@ declare(strict_types = 1);
 
 namespace Doctum;
 
-use Doctum\Parser\Parser;
+use Doctum\Parser\ParserInterface;
 use Doctum\Reflection\ClassReflection;
 use Doctum\Reflection\FunctionReflection;
 use Doctum\Reflection\LazyClassReflection;
@@ -35,7 +35,7 @@ class Project
     protected $versions;
     protected $store;
 
-    /** @var Parser */
+    /** @var ParserInterface */
     protected $parser;
 
     /** @var Renderer */
@@ -100,7 +100,7 @@ class Project
         $this->renderer = $renderer;
     }
 
-    public function setParser(Parser $parser): void
+    public function setParser(ParserInterface $parser): void
     {
         $this->parser = $parser;
     }

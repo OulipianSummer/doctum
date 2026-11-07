@@ -15,8 +15,9 @@ namespace Doctum\Parser;
 
 use Doctum\Project;
 use SplObjectStorage;
+use Doctum\Parser\ProjectTraverserInterface;
 
-class ProjectTraverser
+class ProjectTraverser implements ProjectTraverserInterface
 {
     /**
      * The class visitors
@@ -33,7 +34,7 @@ class ProjectTraverser
     protected $functionVisitors = [];
 
     /**
-     * @param (ClassVisitorInterface|FunctionVisitorInterface)[] $visitors
+     * {@inheritdoc}
      */
     public function __construct(array $visitors = [])
     {

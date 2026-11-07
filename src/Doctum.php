@@ -20,6 +20,7 @@ use PhpParser\NodeVisitor\NameResolver;
 use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter\Standard as PrettyPrinter;
 use PhpParser\Parser as PhpParser;
+use Doctum\Parser\ProjectTraverserInterface;
 use Doctum\Parser\ProjectTraverser;
 use Doctum\Parser\ClassVisitor;
 use Doctum\Parser\FunctionVisitor;
@@ -29,6 +30,7 @@ use Doctum\Parser\Filter\DefaultFilter;
 use Doctum\Parser\Filter\FilterInterface;
 use Doctum\Parser\NodeVisitor;
 use Doctum\Parser\Parser;
+use Doctum\Parser\ParserInterface;
 use Doctum\Parser\ParserContext;
 use Doctum\RemoteRepository\AbstractRemoteRepository;
 use Doctum\Renderer\Renderer;
@@ -81,7 +83,7 @@ class Doctum implements ArrayAccess
     private $project;
 
     /**
-     * @var Parser
+     * @var ParserInterface
      */
     private $parser;
 
@@ -96,7 +98,7 @@ class Doctum implements ArrayAccess
     private $tree;
 
     /**
-     * @var ProjectTraverser
+     * @var ProjectTraverserInterface
      */
     private $traverser;
 
